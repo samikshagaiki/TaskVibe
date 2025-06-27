@@ -1,0 +1,1329 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp",
+    "executeActionsBeforeAnswers": false,
+    "calculateSentiment": true
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager"
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "trainByDomain": false,
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "useStemDict": true
+        },
+        "stemDict": {
+          "hello": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "hi": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "hey": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "good,morn": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "afternoon,good": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "even,good": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "howdi": {
+            "intent": "greetings",
+            "domain": "default"
+          },
+          "creat,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "add,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "new,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "make,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "a,add,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "creat,new,task": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "add,i,need,someth,to": {
+            "intent": "task.create",
+            "domain": "default"
+          },
+          "show,task": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "list,task": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "my,task": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "task,view": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "are,my,task,what": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "me,my,show,todo": {
+            "intent": "task.list",
+            "domain": "default"
+          },
+          "help": {
+            "intent": "help",
+            "domain": "default"
+          },
+          "can,do,what,you": {
+            "intent": "help",
+            "domain": "default"
+          },
+          "command": {
+            "intent": "help",
+            "domain": "default"
+          },
+          "do,how,work,you": {
+            "intent": "help",
+            "domain": "default"
+          },
+          "are,featur,what,your": {
+            "intent": "help",
+            "domain": "default"
+          },
+          "me,motiv": {
+            "intent": "motivation",
+            "domain": "default"
+          },
+          "i,motiv,need": {
+            "intent": "motivation",
+            "domain": "default"
+          },
+          "encourag,me": {
+            "intent": "motivation",
+            "domain": "default"
+          },
+          "feel,i,lazi": {
+            "intent": "motivation",
+            "domain": "default"
+          },
+          "a,complet,i,task": {
+            "intent": "task.completed",
+            "domain": "default"
+          },
+          "done,task": {
+            "intent": "task.completed",
+            "domain": "default"
+          },
+          "finish,task": {
+            "intent": "task.completed",
+            "domain": "default"
+          },
+          "bye": {
+            "intent": "goodbye",
+            "domain": "default"
+          },
+          "goodby": {
+            "intent": "goodbye",
+            "domain": "default"
+          },
+          "later,see,you": {
+            "intent": "goodbye",
+            "domain": "default"
+          },
+          "thank": {
+            "intent": "goodbye",
+            "domain": "default"
+          },
+          "thank,you": {
+            "intent": "goodbye",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "greetings": "default",
+          "task.create": "default",
+          "task.list": "default",
+          "help": "default",
+          "motivation": "default",
+          "task.completed": "default",
+          "goodbye": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "hello",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "hi",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "hey",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "good morning",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "good afternoon",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "good evening",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "howdy",
+            "intent": "greetings"
+          },
+          {
+            "domain": "default",
+            "utterance": "create task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "add task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "new task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "make task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "add a task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "create new task",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need to add something",
+            "intent": "task.create"
+          },
+          {
+            "domain": "default",
+            "utterance": "show tasks",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "list tasks",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "my tasks",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "view tasks",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "what are my tasks",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "show me my todos",
+            "intent": "task.list"
+          },
+          {
+            "domain": "default",
+            "utterance": "help",
+            "intent": "help"
+          },
+          {
+            "domain": "default",
+            "utterance": "what can you do",
+            "intent": "help"
+          },
+          {
+            "domain": "default",
+            "utterance": "commands",
+            "intent": "help"
+          },
+          {
+            "domain": "default",
+            "utterance": "how do you work",
+            "intent": "help"
+          },
+          {
+            "domain": "default",
+            "utterance": "what are your features",
+            "intent": "help"
+          },
+          {
+            "domain": "default",
+            "utterance": "motivate me",
+            "intent": "motivation"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need motivation",
+            "intent": "motivation"
+          },
+          {
+            "domain": "default",
+            "utterance": "encourage me",
+            "intent": "motivation"
+          },
+          {
+            "domain": "default",
+            "utterance": "I feel lazy",
+            "intent": "motivation"
+          },
+          {
+            "domain": "default",
+            "utterance": "I completed a task",
+            "intent": "task.completed"
+          },
+          {
+            "domain": "default",
+            "utterance": "task done",
+            "intent": "task.completed"
+          },
+          {
+            "domain": "default",
+            "utterance": "finished task",
+            "intent": "task.completed"
+          },
+          {
+            "domain": "default",
+            "utterance": "bye",
+            "intent": "goodbye"
+          },
+          {
+            "domain": "default",
+            "utterance": "goodbye",
+            "intent": "goodbye"
+          },
+          {
+            "domain": "default",
+            "utterance": "see you later",
+            "intent": "goodbye"
+          },
+          {
+            "domain": "default",
+            "utterance": "thanks",
+            "intent": "goodbye"
+          },
+          {
+            "domain": "default",
+            "utterance": "thank you",
+            "intent": "goodbye"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "hello": 1,
+              "hi": 1,
+              "hey": 1,
+              "good": 1,
+              "morn": 1,
+              "afternoon": 1,
+              "even": 1,
+              "howdi": 1,
+              "creat": 1,
+              "task": 1,
+              "add": 1,
+              "new": 1,
+              "make": 1,
+              "a": 1,
+              "i": 1,
+              "need": 1,
+              "to": 1,
+              "someth": 1,
+              "show": 1,
+              "list": 1,
+              "my": 1,
+              "view": 1,
+              "what": 1,
+              "are": 1,
+              "me": 1,
+              "todo": 1,
+              "help": 1,
+              "can": 1,
+              "you": 1,
+              "do": 1,
+              "command": 1,
+              "how": 1,
+              "work": 1,
+              "your": 1,
+              "featur": 1,
+              "motiv": 1,
+              "encourag": 1,
+              "feel": 1,
+              "lazi": 1,
+              "complet": 1,
+              "done": 1,
+              "finish": 1,
+              "bye": 1,
+              "goodby": 1,
+              "see": 1,
+              "later": 1,
+              "thank": 1
+            },
+            "intents": {
+              "greetings": 1,
+              "task.create": 1,
+              "task.list": 1,
+              "help": 1,
+              "motivation": 1,
+              "task.completed": 1,
+              "goodbye": 1
+            },
+            "intentFeatures": {
+              "greetings": {
+                "hello": 1,
+                "hi": 1,
+                "hey": 1,
+                "good": 1,
+                "morn": 1,
+                "afternoon": 1,
+                "even": 1,
+                "howdi": 1
+              },
+              "task.create": {
+                "creat": 1,
+                "task": 1,
+                "add": 1,
+                "new": 1,
+                "make": 1,
+                "a": 1,
+                "i": 1,
+                "need": 1,
+                "to": 1,
+                "someth": 1
+              },
+              "task.list": {
+                "show": 1,
+                "task": 1,
+                "list": 1,
+                "my": 1,
+                "view": 1,
+                "what": 1,
+                "are": 1,
+                "me": 1,
+                "todo": 1
+              },
+              "help": {
+                "help": 1,
+                "what": 1,
+                "can": 1,
+                "you": 1,
+                "do": 1,
+                "command": 1,
+                "how": 1,
+                "work": 1,
+                "are": 1,
+                "your": 1,
+                "featur": 1
+              },
+              "motivation": {
+                "motiv": 1,
+                "me": 1,
+                "i": 1,
+                "need": 1,
+                "encourag": 1,
+                "feel": 1,
+                "lazi": 1
+              },
+              "task.completed": {
+                "i": 1,
+                "complet": 1,
+                "a": 1,
+                "task": 1,
+                "done": 1,
+                "finish": 1
+              },
+              "goodbye": {
+                "bye": 1,
+                "goodby": 1,
+                "see": 1,
+                "you": 1,
+                "later": 1,
+                "thank": 1
+              }
+            },
+            "featuresToIntent": {
+              "hello": [
+                "greetings"
+              ],
+              "hi": [
+                "greetings"
+              ],
+              "hey": [
+                "greetings"
+              ],
+              "good": [
+                "greetings"
+              ],
+              "morn": [
+                "greetings"
+              ],
+              "afternoon": [
+                "greetings"
+              ],
+              "even": [
+                "greetings"
+              ],
+              "howdi": [
+                "greetings"
+              ],
+              "creat": [
+                "task.create"
+              ],
+              "task": [
+                "task.create",
+                "task.list",
+                "task.completed"
+              ],
+              "add": [
+                "task.create"
+              ],
+              "new": [
+                "task.create"
+              ],
+              "make": [
+                "task.create"
+              ],
+              "a": [
+                "task.create",
+                "task.completed"
+              ],
+              "i": [
+                "task.create",
+                "motivation",
+                "task.completed"
+              ],
+              "need": [
+                "task.create",
+                "motivation"
+              ],
+              "to": [
+                "task.create"
+              ],
+              "someth": [
+                "task.create"
+              ],
+              "show": [
+                "task.list"
+              ],
+              "list": [
+                "task.list"
+              ],
+              "my": [
+                "task.list"
+              ],
+              "view": [
+                "task.list"
+              ],
+              "what": [
+                "task.list",
+                "help"
+              ],
+              "are": [
+                "task.list",
+                "help"
+              ],
+              "me": [
+                "task.list",
+                "motivation"
+              ],
+              "todo": [
+                "task.list"
+              ],
+              "help": [
+                "help"
+              ],
+              "can": [
+                "help"
+              ],
+              "you": [
+                "help",
+                "goodbye"
+              ],
+              "do": [
+                "help"
+              ],
+              "command": [
+                "help"
+              ],
+              "how": [
+                "help"
+              ],
+              "work": [
+                "help"
+              ],
+              "your": [
+                "help"
+              ],
+              "featur": [
+                "help"
+              ],
+              "motiv": [
+                "motivation"
+              ],
+              "encourag": [
+                "motivation"
+              ],
+              "feel": [
+                "motivation"
+              ],
+              "lazi": [
+                "motivation"
+              ],
+              "complet": [
+                "task.completed"
+              ],
+              "done": [
+                "task.completed"
+              ],
+              "finish": [
+                "task.completed"
+              ],
+              "bye": [
+                "goodbye"
+              ],
+              "goodby": [
+                "goodbye"
+              ],
+              "see": [
+                "goodbye"
+              ],
+              "later": [
+                "goodbye"
+              ],
+              "thank": [
+                "goodbye"
+              ]
+            },
+            "neuralNetwork": {
+              "settings": {
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true,
+                "log": true
+              },
+              "features": [
+                "hello",
+                "hi",
+                "hey",
+                "good",
+                "morn",
+                "afternoon",
+                "even",
+                "howdi",
+                "creat",
+                "task",
+                "add",
+                "new",
+                "make",
+                "a",
+                "i",
+                "need",
+                "to",
+                "someth",
+                "show",
+                "list",
+                "my",
+                "view",
+                "what",
+                "are",
+                "me",
+                "todo",
+                "help",
+                "can",
+                "you",
+                "do",
+                "command",
+                "how",
+                "work",
+                "your",
+                "featur",
+                "motiv",
+                "encourag",
+                "feel",
+                "lazi",
+                "complet",
+                "done",
+                "finish",
+                "bye",
+                "goodby",
+                "see",
+                "later",
+                "thank"
+              ],
+              "intents": [
+                "greetings",
+                "task.create",
+                "task.list",
+                "help",
+                "motivation",
+                "task.completed",
+                "goodbye"
+              ],
+              "perceptrons": [
+                [
+                  9.633333206176758,
+                  9.633331298828125,
+                  9.633330345153809,
+                  7.225002288818359,
+                  2.4083340167999268,
+                  2.4083340167999268,
+                  2.408332586288452,
+                  9.633330345153809,
+                  -0.7966582775115967,
+                  -4.50477933883667,
+                  -1.2566417455673218,
+                  -0.7228352427482605,
+                  -0.5847850441932678,
+                  -0.20334699749946594,
+                  -2.2843639850616455,
+                  -1.0795631408691406,
+                  -0.5209892392158508,
+                  -0.5209892392158508,
+                  -0.9659595489501953,
+                  -0.476213276386261,
+                  -0.9402356147766113,
+                  -0.43202680349349976,
+                  -1.6173057556152344,
+                  -1.0648219585418701,
+                  -3.2106845378875732,
+                  -0.6508175134658813,
+                  -4.652390003204346,
+                  -0.5028122067451477,
+                  -2.575953245162964,
+                  -1.1474273204803467,
+                  -4.652377605438232,
+                  -0.5914633870124817,
+                  -0.5914633870124817,
+                  -0.993137001991272,
+                  -0.993137001991272,
+                  -1.57763671875,
+                  -1.4519007205963135,
+                  -1.1910302639007568,
+                  -1.1910302639007568,
+                  0,
+                  -0.163542240858078,
+                  -0.15843570232391357,
+                  -4.652376651763916,
+                  -4.652376174926758,
+                  -1.0382126569747925,
+                  -1.0382126569747925,
+                  -4.652376651763916,
+                  4.652379205862923
+                ],
+                [
+                  -0.7783320546150208,
+                  -0.7776539325714111,
+                  -0.7769744396209717,
+                  -0.5930043458938599,
+                  -0.19795358180999756,
+                  -0.19745488464832306,
+                  -0.19695541262626648,
+                  -0.7757946252822876,
+                  3.699841022491455,
+                  7.867223262786865,
+                  5.928669452667236,
+                  3.570425033569336,
+                  5.535778522491455,
+                  -0.740506649017334,
+                  -2.690349817276001,
+                  2.824035882949829,
+                  3.659665822982788,
+                  3.659665822982788,
+                  -8.673225402832031,
+                  -8.63045597076416,
+                  -8.599662780761719,
+                  -8.574792861938477,
+                  -1.0613625049591064,
+                  -0.9135332703590393,
+                  -0.5413516759872437,
+                  -0.030323779210448265,
+                  -0.8012287616729736,
+                  -0.09527146816253662,
+                  -0.501311182975769,
+                  -0.2872273325920105,
+                  -0.8005857467651367,
+                  -0.1515485644340515,
+                  -0.1515485644340515,
+                  -0.03318529948592186,
+                  -0.03318529948592186,
+                  -1.0227410793304443,
+                  -0.2679131329059601,
+                  -0.3005172312259674,
+                  -0.3005172312259674,
+                  -5.165948390960693,
+                  -8.533599853515625,
+                  -8.514434814453125,
+                  -0.7818874716758728,
+                  -0.781215250492096,
+                  -0.1460813581943512,
+                  -0.1460813581943512,
+                  -0.7803219556808472,
+                  0.7976203299245667
+                ],
+                [
+                  -0.17646707594394684,
+                  -0.17044247686862946,
+                  -0.16461695730686188,
+                  -0.291850209236145,
+                  -0.0903911218047142,
+                  -0.08099761605262756,
+                  -0.07167235016822815,
+                  -0.14929017424583435,
+                  -5.183684349060059,
+                  5.845071792602539,
+                  -5.183679580688477,
+                  -5.183674335479736,
+                  -5.18366813659668,
+                  -2.0149734020233154,
+                  -1.9970866441726685,
+                  -0.14463374018669128,
+                  0,
+                  0,
+                  9.101924896240234,
+                  9.102042198181152,
+                  9.10177993774414,
+                  9.102014541625977,
+                  -0.21448886394500732,
+                  0.2147599160671234,
+                  -2.3685078620910645,
+                  -0.8880736827850342,
+                  -0.5486263632774353,
+                  -0.34168529510498047,
+                  -0.7224727869033813,
+                  -0.5880254507064819,
+                  -0.5159424543380737,
+                  -0.15742741525173187,
+                  -0.15742741525173187,
+                  -0.8725301027297974,
+                  -0.8725301027297974,
+                  -0.8733035326004028,
+                  -0.7314141392707825,
+                  -0.136949822306633,
+                  -0.136949822306633,
+                  -1.5776536464691162,
+                  -5.183694362640381,
+                  -5.183691501617432,
+                  -0.1903759241104126,
+                  -0.19223329424858093,
+                  -0.04618322476744652,
+                  -0.04618322476744652,
+                  -0.2062578946352005,
+                  -0.661359298409543
+                ],
+                [
+                  -2.4084291458129883,
+                  -2.408428907394409,
+                  -2.408428907394409,
+                  -1.8076845407485962,
+                  -0.6059512495994568,
+                  -0.6007747054100037,
+                  -0.6007455587387085,
+                  -2.408428907394409,
+                  -0.06649354845285416,
+                  -3.964656114578247,
+                  -0.2149512618780136,
+                  -0.04819231852889061,
+                  -0.025716230273246765,
+                  -0.1690719723701477,
+                  -1.351579189300537,
+                  -0.5476131439208984,
+                  -0.1471433788537979,
+                  -0.1471433788537979,
+                  -0.050392795354127884,
+                  -0.013998802751302719,
+                  -2.8153653144836426,
+                  -0.010670170187950134,
+                  3.382495880126953,
+                  0.9890967011451721,
+                  -1.5679621696472168,
+                  -0.02678501605987549,
+                  11.877280235290527,
+                  2.3934004306793213,
+                  0.8200417757034302,
+                  5.281347274780273,
+                  11.877280235290527,
+                  2.887946605682373,
+                  2.887946605682373,
+                  3.75284481048584,
+                  3.75284481048584,
+                  -1.0324150323867798,
+                  -0.8931649327278137,
+                  -0.5937905311584473,
+                  -0.5937905311584473,
+                  -0.13852769136428833,
+                  -0.31301000714302063,
+                  -0.2742824852466583,
+                  -2.4084677696228027,
+                  -2.408432960510254,
+                  -1.7798177003860474,
+                  -1.7798177003860474,
+                  -3.2299649715423584,
+                  2.4084306860614912
+                ],
+                [
+                  -0.8400883674621582,
+                  -0.8311922550201416,
+                  -0.823134183883667,
+                  -0.8852612376213074,
+                  -0.3088264465332031,
+                  -0.27825888991355896,
+                  -0.24896258115768433,
+                  -0.8118909597396851,
+                  -0.056175291538238525,
+                  -2.2925422191619873,
+                  -2.5168397426605225,
+                  -0.04073450714349747,
+                  -0.021324114874005318,
+                  -1.6148011684417725,
+                  4.7290472984313965,
+                  1.950780987739563,
+                  -2.4742794036865234,
+                  -2.4742794036865234,
+                  -2.53960919380188,
+                  -0.0019564907997846603,
+                  -2.5395867824554443,
+                  -0.0012619387125596404,
+                  -0.26974761486053467,
+                  -0.20048043131828308,
+                  6.679843425750732,
+                  -2.5345253944396973,
+                  -0.7911255955696106,
+                  -0.04446244239807129,
+                  -0.7386555671691895,
+                  -0.11109927296638489,
+                  -0.7897657155990601,
+                  -0.044940125197172165,
+                  -0.044940125197172165,
+                  -0.19852803647518158,
+                  -0.19852803647518158,
+                  6.820307731628418,
+                  6.820292949676514,
+                  4.385549068450928,
+                  4.385549068450928,
+                  -1.607275128364563,
+                  -0.20262479782104492,
+                  -0.17364616692066193,
+                  -0.87869793176651,
+                  -0.8654130101203918,
+                  -0.33041077852249146,
+                  -0.33041077852249146,
+                  -0.9191751480102539,
+                  0.7855717857886343
+                ],
+                [
+                  -0.25313684344291687,
+                  -0.24379338324069977,
+                  -0.23479080200195312,
+                  -0.4348958134651184,
+                  -0.1309361606836319,
+                  -0.11755193769931793,
+                  -0.10407925397157669,
+                  -0.21045325696468353,
+                  -2.8980696201324463,
+                  3.705857276916504,
+                  -5.118443965911865,
+                  -2.923431634902954,
+                  -2.903005838394165,
+                  2.2084388732910156,
+                  3.3308894634246826,
+                  -1.2683151960372925,
+                  -0.015221547335386276,
+                  -0.015221547335386276,
+                  -2.889831066131592,
+                  -2.889765739440918,
+                  -2.8897628784179688,
+                  -2.889763116836548,
+                  -0.39990469813346863,
+                  -0.39990469813346863,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.34952133893966675,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.2465366125106812,
+                  0,
+                  -1.257398247718811,
+                  -1.257398247718811,
+                  5.85662317276001,
+                  11.395949363708496,
+                  11.395946502685547,
+                  -0.29648327827453613,
+                  -0.28557413816452026,
+                  -0.1673940271139145,
+                  -0.1673940271139145,
+                  -0.3929958939552307,
+                  -0.8160929010006015
+                ],
+                [
+                  -3.247321605682373,
+                  -3.2472996711730957,
+                  -3.24727725982666,
+                  -2.4357314109802246,
+                  -0.8119192123413086,
+                  -0.8119056224822998,
+                  -0.8118919134140015,
+                  -3.2472403049468994,
+                  -0.4702203571796417,
+                  -3.0063531398773193,
+                  -0.7093075513839722,
+                  -0.43023672699928284,
+                  -0.36811161041259766,
+                  -0.11110510677099228,
+                  -1.5270878076553345,
+                  -0.6668509244918823,
+                  -0.30048662424087524,
+                  -0.30048662424087524,
+                  -0.5701181292533875,
+                  -0.319646954536438,
+                  -0.5537446141242981,
+                  -0.29811909794807434,
+                  -1.9431483745574951,
+                  -0.45714500546455383,
+                  -2.193938732147217,
+                  -0.3970681428909302,
+                  -3.2472169399261475,
+                  -1.4596713781356812,
+                  0.018624678254127502,
+                  -3.0400290489196777,
+                  -3.2471935749053955,
+                  -1.55130934715271,
+                  -1.55130934715271,
+                  -0.4236450493335724,
+                  -0.4236450493335724,
+                  -1.0536646842956543,
+                  -1.0535542964935303,
+                  -0.8602309823036194,
+                  -0.8602309823036194,
+                  0,
+                  -0.2411753535270691,
+                  -0.2411555051803589,
+                  11.038583755493164,
+                  11.038609504699707,
+                  5.508303165435791,
+                  5.508303165435791,
+                  11.026928901672363,
+                  3.2477898393128966
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "hello"
+      ],
+      [
+        "en",
+        "hi"
+      ],
+      [
+        "en",
+        "hey"
+      ],
+      [
+        "en",
+        "good morning"
+      ],
+      [
+        "en",
+        "good afternoon"
+      ],
+      [
+        "en",
+        "good evening"
+      ],
+      [
+        "en",
+        "howdy"
+      ],
+      [
+        "en",
+        "create task"
+      ],
+      [
+        "en",
+        "add task"
+      ],
+      [
+        "en",
+        "new task"
+      ],
+      [
+        "en",
+        "make task"
+      ],
+      [
+        "en",
+        "add a task"
+      ],
+      [
+        "en",
+        "create new task"
+      ],
+      [
+        "en",
+        "I need to add something"
+      ],
+      [
+        "en",
+        "show tasks"
+      ],
+      [
+        "en",
+        "list tasks"
+      ],
+      [
+        "en",
+        "my tasks"
+      ],
+      [
+        "en",
+        "view tasks"
+      ],
+      [
+        "en",
+        "what are my tasks"
+      ],
+      [
+        "en",
+        "show me my todos"
+      ],
+      [
+        "en",
+        "help"
+      ],
+      [
+        "en",
+        "what can you do"
+      ],
+      [
+        "en",
+        "commands"
+      ],
+      [
+        "en",
+        "how do you work"
+      ],
+      [
+        "en",
+        "what are your features"
+      ],
+      [
+        "en",
+        "motivate me"
+      ],
+      [
+        "en",
+        "I need motivation"
+      ],
+      [
+        "en",
+        "encourage me"
+      ],
+      [
+        "en",
+        "I feel lazy"
+      ],
+      [
+        "en",
+        "I completed a task"
+      ],
+      [
+        "en",
+        "task done"
+      ],
+      [
+        "en",
+        "finished task"
+      ],
+      [
+        "en",
+        "bye"
+      ],
+      [
+        "en",
+        "goodbye"
+      ],
+      [
+        "en",
+        "see you later"
+      ],
+      [
+        "en",
+        "thanks"
+      ],
+      [
+        "en",
+        "thank you"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "greetings": [
+          {
+            "answer": "🤖 Hello there! I'm TaskVibe Assistant, your personal productivity companion! How can I help you stay organized today?"
+          },
+          {
+            "answer": "🤖 Hi! Ready to tackle some tasks? I'm here to help you stay productive and organized!"
+          },
+          {
+            "answer": "🤖 Hey! Great to see you! Let's make today productive together. What would you like to work on?"
+          }
+        ],
+        "task.create": [
+          {
+            "answer": "🤖 Excellent! I love helping with new tasks! Please tell me what you'd like to add. You can describe it like: \"Add a task to call mom with high priority\" or just tell me what needs to be done!"
+          }
+        ],
+        "task.list": [
+          {
+            "answer": "🤖 Your tasks are displayed right above in the main interface! I can see you're staying organized. Need help creating a new task or want some productivity tips?"
+          }
+        ],
+        "help": [
+          {
+            "answer": "🤖 I'm your TaskVibe Assistant! Here's what I can do:\n• Create new tasks for you\n• Provide productivity tips\n• Offer motivation when you need it\n• Help organize your workflow\n• Answer questions about task management\n\nJust tell me what you need!"
+          }
+        ],
+        "motivation": [
+          {
+            "answer": "🤖 You've got this! 💪 Remember, every big achievement starts with small steps. Each task you complete brings you closer to your goals. Stay focused and keep moving forward!"
+          },
+          {
+            "answer": "🤖 Don't give up! 🌟 Productivity isn't about perfection, it's about progress. Take it one task at a time, and celebrate your wins along the way!"
+          }
+        ],
+        "task.completed": [
+          {
+            "answer": "🤖 Awesome work! 🎉 There's nothing quite like the satisfaction of completing a task. Keep up the momentum - you're doing great!"
+          }
+        ],
+        "goodbye": [
+          {
+            "answer": "🤖 Goodbye! Keep being productive and remember - I'm always here when you need help organizing your tasks! 👋"
+          },
+          {
+            "answer": "🤖 See you later! Don't forget to tackle those tasks. You've got this! 🚀"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}
