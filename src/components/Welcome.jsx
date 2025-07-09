@@ -46,7 +46,7 @@ export default function Welcome() {
       sx={{
         minHeight: "100vh",
         height: "100dvh",
-        background: "linear-gradient(135deg,rgb(42, 0, 71),rgb(34, 67, 158),rgb(81, 76, 226))",
+        background: "linear-gradient(135deg,rgb(77, 34, 158),rgb(81, 76, 226))",
         overflow: "hidden",
         position: "relative",
         display: "flex",
@@ -54,7 +54,7 @@ export default function Welcome() {
         alignItems: "center",
         justifyContent: "center",
         px: { xs: 2, sm: 4 },
-        py: { xs: 2, sm: 4 },
+        py: { xs: 1, sm: 2 }, // reduced top & bottom padding
         textAlign: "center",
       }}
     >
@@ -96,7 +96,7 @@ export default function Welcome() {
               exit={{ scale: 0, opacity: 0 }}
               style={{
                 position: "absolute",
-                top: -40,
+                top: -80, // reduced gap from bot
                 left: "50%",
                 transform: "translateX(-50%)",
                 width: "max-content",
@@ -168,7 +168,7 @@ export default function Welcome() {
       <AnimatePresence>
         {showWelcome && (
           <motion.div
-            initial={{ y: -150, opacity: 0, scale: 0.5 }}
+            initial={{ y: -120, opacity: 0, scale: 0.5 }} // slightly reduced y for faster appearance
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
             style={{ position: "relative" }}
@@ -182,6 +182,7 @@ export default function Welcome() {
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
+                top : +100,
               }}
             >
               <Box sx={{ width: { xs: 150, sm: 200, md: 220 } }}>
@@ -211,7 +212,7 @@ export default function Welcome() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.8 }}
-        style={{ marginTop: "1.5rem" }}
+        style={{ marginTop: "1rem" }} // slightly reduced margin
       >
         <Typography
           variant="h1"

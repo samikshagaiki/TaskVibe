@@ -6,7 +6,7 @@ import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Tasks from './pages/Tasks.jsx';
-import BackgroundParticles from "./components/BackgroundParticles";
+import AddTaskPage from './pages/AddTasks.jsx'; 
 
 export default function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
@@ -19,12 +19,15 @@ export default function App() {
         background: 'linear-gradient(135deg, #6B46C1, #4299E1)'
       }}>
         
+        
         <Navbar user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={!user ? <Login setUser={setUser} /> : <Navigate to="/tasks" />} />
           <Route path="/register" element={!user ? <Register setUser={setUser} /> : <Navigate to="/tasks" />} />
-          <Route path="/tasks" element={user ? <Tasks user={user} /> : <Navigate to="/login" />} />
+          <Route path="/tasks" element={user?<Tasks user={user} />: <Navigate to="/login" />} />
+          <Route path="/add-task" element={<AddTaskPage />} />
+          
         </Routes>
       </Box>
     </Router>

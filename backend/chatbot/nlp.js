@@ -1,30 +1,103 @@
-import { Configuration, OpenAIApi } from 'openai';
-import dotenv from 'dotenv';
-import process from 'process';
-dotenv.config();
+const { NlpManager } = require('node-nlp');
+const axios = require('axios');
 
 class TaskVibeAssistant {
     constructor() {
-        this.configuration = new Configuration({
-            apiKey: process.env.OPENAI_API_KEY || (dotenv.parsed && dotenv.parsed.OPENAI_API_KEY),
-        });
-        this.openai = new OpenAIApi(this.configuration);
+        this.manager = null;
         this.context = {
             lastAction: null,
             waitingForTaskDetails: false,
             pendingTask: null
         };
-        this.conversationHistory = [];
     }
 
     async setup() {
         try {
-            console.log('TaskVibe Assistant with OpenAI API initialized successfully!');
-            return this;
+            this.manager = new NlpManager({ languages: ['en'] });
+            await this.trainModel();
+            console.log('TaskVibe Assistant initialized successfully!');
+            return this.manager;
         } catch (error) {
             console.error('Error setting up TaskVibe Assistant:', error);
             throw error;
         }
+    }
+
+    async trainModel() {
+        const { manager } = this;
+
+        // Greetings
+        manager.addDocument('en', 'hello', 'greetings');
+        manager.addDocument('en', 'hi', 'greetings');
+        manager.addDocument('en', 'hey', 'greetings');
+        manager.addDocument('en', 'good morning', 'greetings');
+        manager.addDocument('en', 'good afternoon', 'greetings');
+        manager.addDocument('en', 'good evening', 'greetings');
+        manager.addDocument('en', 'howdy', 'greetings');
+
+        // Task creation
+        manager.addDocument('en', 'create task', 'task.create');
+        manager.addDocument('en', 'add task', 'task.create');
+        manager.addDocument('en', 'new task', 'task.create');
+        manager.addDocument('en', 'make task', 'task.create');
+        manager.addDocument('en', 'add a task', 'task.create');
+        manager.addDocument('en', 'create new task', 'task.create');
+        manager.addDocument('en', 'I need to add something', 'task.create');
+
+        // Task management
+        manager.addDocument('en', 'show tasks', 'task.list');
+        manager.addDocument('en', 'list tasks', 'task.list');
+        manager.addDocument('en', 'my tasks', 'task.list');
+        manager.addDocument('en', 'view tasks', 'task.list');
+        manager.addDocument('en', 'what are my tasks', 'task.list');
+        manager.addDocument('en', 'show me my todos', 'task.list');
+
+        // Help and capabilities
+        manager.addDocument('en', 'help', 'help');
+        manager.addDocument('en', 'what can you do', 'help');
+        manager.addDocument('en', 'commands', 'help');
+        manager.addDocument('en', 'how do you work', 'help');
+        manager.addDocument('en', 'what are your features', 'help');
+
+        // Productivity and motivation
+        manager.addDocument('en', 'motivate me', 'motivation');
+        manager.addDocument('en', 'I need motivation', 'motivation');
+        manager.addDocument('en', 'encourage me', 'motivation');
+        manager.addDocument('en', 'I feel lazy', 'motivation');
+
+        // Task completion
+        manager.addDocument('en', 'I completed a task', 'task.completed');
+        manager.addDocument('en', 'task done', 'task.completed');
+        manager.addDocument('en', 'finished task', 'task.completed');
+
+        // Goodbye
+        manager.addDocument('en', 'bye', 'goodbye');
+        manager.addDocument('en', 'goodbye', 'goodbye');
+        manager.addDocument('en', 'see you later', 'goodbye');
+        manager.addDocument('en', 'thanks', 'goodbye');
+        manager.addDocument('en', 'thank you', 'goodbye');
+
+        // Add varied responses
+        manager.addAnswer('en', 'greetings', '🤖 Hello there! I\'m TaskVibe Assistant, your personal productivity companion! How can I help you stay organized today?');
+        manager.addAnswer('en', 'greetings', '🤖 Hi! Ready to tackle some tasks? I\'m here to help you stay productive and organized!');
+        manager.addAnswer('en', 'greetings', '🤖 Hey! Great to see you! Let\'s make today productive together. What would you like to work on?');
+
+        manager.addAnswer('en', 'task.create', '🤖 Excellent! I love helping with new tasks! Please tell me what you\'d like to add. You can describe it like: "Add a task to call mom with high priority" or just tell me what needs to be done!');
+        
+        manager.addAnswer('en', 'task.list', '🤖 Your tasks are displayed right above in the main interface! I can see you\'re staying organized. Need help creating a new task or want some productivity tips?');
+        
+        manager.addAnswer('en', 'help', '🤖 I\'m your TaskVibe Assistant! Here\'s what I can do:\n• Create new tasks for you\n• Provide productivity tips\n• Offer motivation when you need it\n• Help organize your workflow\n• Answer questions about task management\n\nJust tell me what you need!');
+        
+        manager.addAnswer('en', 'motivation', '🤖 You\'ve got this! 💪 Remember, every big achievement starts with small steps. Each task you complete brings you closer to your goals. Stay focused and keep moving forward!');
+        manager.addAnswer('en', 'motivation', '🤖 Don\'t give up! 🌟 Productivity isn\'t about perfection, it\'s about progress. Take it one task at a time, and celebrate your wins along the way!');
+        
+        manager.addAnswer('en', 'task.completed', '🤖 Awesome work! 🎉 There\'s nothing quite like the satisfaction of completing a task. Keep up the momentum - you\'re doing great!');
+        
+        manager.addAnswer('en', 'goodbye', '🤖 Goodbye! Keep being productive and remember - I\'m always here when you need help organizing your tasks! 👋');
+        manager.addAnswer('en', 'goodbye', '🤖 See you later! Don\'t forget to tackle those tasks. You\'ve got this! 🚀');
+
+        await manager.train();
+        manager.save();
     }
 
     async processMessage(message, userId) {
@@ -34,72 +107,33 @@ class TaskVibeAssistant {
                 return await this.handleTaskCreation(message, userId);
             }
 
-            // Prepare the conversation context for OpenAI
-            const systemPrompt = `
-                You are TaskVibe Assistant, a friendly and productive task management assistant. Your role is to help users create and manage tasks, provide motivational responses, and offer productivity tips. Use a conversational tone with emojis (🤖, 💪, 🎉, etc.) to keep interactions engaging. 
+            const response = await this.manager.process('en', message);
+            let reply = response.answer || this.getIntelligentResponse(message);
 
-                Supported intents:
-                - Greetings: Respond with a welcoming message (e.g., "Hello! Ready to tackle tasks? 🤖").
-                - Task creation: Prompt for task details (e.g., "Tell me about the task you'd like to add! 😊").
-                - Task list: Inform user tasks are displayed in the interface (e.g., "Your tasks are shown above! Need help?").
-                - Motivation: Provide encouraging words (e.g., "You've got this! Keep pushing forward! 💪").
-                - Task completed: Celebrate completion (e.g., "Awesome job! 🎉 What's next?").
-                - Goodbye: Bid farewell (e.g., "See you later! Stay productive! 👋").
-                - Help: List capabilities (e.g., "I can create tasks, give tips, and motivate you!").
-                - Default: Respond helpfully and suggest task-related actions.
-
-                If the user provides task details, set waitingForTaskDetails to true and handle it in the next message. Detect task priority (high, medium, low) based on keywords like "urgent," "important," or "later." Keep responses concise and action-oriented.
-            `;
-
-            // Append the new message to conversation history
-            this.conversationHistory.push({ role: 'user', content: message });
-
-            // Limit conversation history to avoid token limits (e.g., last 10 messages)
-            if (this.conversationHistory.length > 10) {
-                this.conversationHistory = this.conversationHistory.slice(-10);
-            }
-
-            // Call OpenAI API
-            const completion = await this.openai.createChatCompletion({
-                model: 'gpt-3.5-turbo', // You can use 'gpt-4' if available
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    ...this.conversationHistory,
-                ],
-                max_tokens: 200,
-                temperature: 0.7,
-            });
-
-            const response = completion.data.choices[0].message.content;
-            let intent = this.detectIntent(response, message);
-
-            // Update conversation history
-            this.conversationHistory.push({ role: 'assistant', content: response });
-
-            // Handle task creation intent
-            if (intent === 'task.create') {
+            // Handle specific intents
+            if (response.intent === 'task.create') {
                 this.context.waitingForTaskDetails = true;
                 this.context.lastAction = 'task.create';
             }
 
             return {
-                message: response,
-                intent: intent,
-                confidence: 0.9, // OpenAI doesn't provide confidence scores, so we use a default
+                message: reply,
+                intent: response.intent,
+                confidence: response.score,
                 context: this.context
             };
 
         } catch (error) {
-            console.error('Error processing message with OpenAI:', error);
+            console.error('Error processing message:', error);
             return {
-                message: '🤖 Oops! I hit a snag. Could you try again? I’m here to help with your tasks! 🔧',
+                message: '🤖 Oops! I encountered a small glitch. Could you please try again? I\'m here to help!',
                 intent: 'error',
                 confidence: 0
             };
         }
     }
 
-    async handleTaskCreation(message) {
+    async handleTaskCreation(message, userId) {
         try {
             const taskDetails = this.extractTaskDetails(message);
             
@@ -164,27 +198,15 @@ class TaskVibeAssistant {
         };
     }
 
-    detectIntent(response, message) {
-        // Simple intent detection based on response and message content
-        const lowerMessage = message.toLowerCase();
-
-        if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-            return 'greetings';
-        } else if (lowerMessage.includes('task') && (lowerMessage.includes('create') || lowerMessage.includes('add') || lowerMessage.includes('new'))) {
-            return 'task.create';
-        } else if (lowerMessage.includes('task') && (lowerMessage.includes('list') || lowerMessage.includes('show') || lowerMessage.includes('view'))) {
-            return 'task.list';
-        } else if (lowerMessage.includes('motivate') || lowerMessage.includes('encourage') || lowerMessage.includes('lazy')) {
-            return 'motivation';
-        } else if (lowerMessage.includes('completed') || lowerMessage.includes('done') || lowerMessage.includes('finished')) {
-            return 'task.completed';
-        } else if (lowerMessage.includes('bye') || lowerMessage.includes('goodbye') || lowerMessage.includes('thanks')) {
-            return 'goodbye';
-        } else if (lowerMessage.includes('help') || lowerMessage.includes('what can you do') || lowerMessage.includes('commands')) {
-            return 'help';
-        } else {
-            return 'default';
-        }
+    getIntelligentResponse(message) {
+        const responses = [
+            "🤖 That's interesting! I'm here to help with your tasks and productivity. What would you like to work on?",
+            "🤖 I understand! While I specialize in task management, I'm always learning. How can I help you stay organized today?",
+            "🤖 Great question! I'm focused on helping you be more productive. Want to create a new task or need some motivation?",
+            "🤖 I appreciate you sharing that! Let's channel that energy into getting things done. What's on your task list today?"
+        ];
+        
+        return responses[Math.floor(Math.random() * responses.length)];
     }
 
     getProductivityTip() {
@@ -206,4 +228,5 @@ async function setupChatbot() {
     await assistant.setup();
     return assistant;
 }
-export { setupChatbot, TaskVibeAssistant };
+
+module.exports = { setupChatbot, TaskVibeAssistant };
