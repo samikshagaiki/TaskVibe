@@ -1,17 +1,95 @@
+
 import { useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Box, List } from '@mui/material';
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  useSortable,
+  arrayMove,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
+
+const SortableTask = ({
+  task,
+  onUpdate,
+  onDelete,
+  onStartEdit,
+  onCancelEdit,
+  onSaveEdit,
+  onEditChange,
+  isEditing,
+  editingTask,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({
+    id: task._id,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <Box
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      sx={{ mb: 1 }}
+    >
+      <TaskCard
+        task={task}
+        onUpdate={onUpdate}
+        onDelete={onDelete}
+        onStartEdit={onStartEdit}
+        onCancelEdit={onCancelEdit}
+        onSaveEdit={onSaveEdit}
+        onEditChange={onEditChange}
+        isEditing={isEditing}
+        editingTask={editingTask}
+      />
+    </Box>
+  );
+};
 
 const TaskList = ({ tasks, onUpdate, onDelete, onReorder }) => {
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTask, setEditingTask] = useState(null);
 
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
-    const reorderedTasks = Array.from(tasks);
-    const [movedTask] = reorderedTasks.splice(result.source.index, 1);
-    reorderedTasks.splice(result.destination.index, 0, movedTask);
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = tasks.findIndex((task) => task._id === active.id);
+    const newIndex = tasks.findIndex((task) => task._id === over.id);
+
+    if (oldIndex === -1 || newIndex === -1) return;
+
+    const reorderedTasks = arrayMove(tasks, oldIndex, newIndex);
+
     onReorder(reorderedTasks);
   };
 
@@ -38,43 +116,33 @@ const TaskList = ({ tasks, onUpdate, onDelete, onReorder }) => {
   };
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="tasks">
-        {(provided) => (
-          <List
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            sx={{ width: '100%' }}
-          >
-            {tasks.map((task, index) => (
-              <Draggable key={task._id} draggableId={task._id} index={index}>
-                {(provided) => (
-                  <Box
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    sx={{ mb: 1 }}
-                  >
-                    <TaskCard
-                      task={task}
-                      onUpdate={onUpdate}
-                      onDelete={onDelete}
-                      onStartEdit={handleStartEdit}
-                      onCancelEdit={handleCancelEdit}
-                      onSaveEdit={handleSaveEdit}
-                      onEditChange={handleEditChange}
-                      isEditing={editingTaskId === task._id}
-                      editingTask={editingTask}
-                    />
-                  </Box>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </List>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext
+        items={tasks.map((task) => task._id)}
+        strategy={verticalListSortingStrategy}
+      >
+        <List sx={{ width: '100%' }}>
+          {tasks.map((task) => (
+            <SortableTask
+              key={task._id}
+              task={task}
+              onUpdate={onUpdate}
+              onDelete={onDelete}
+              onStartEdit={handleStartEdit}
+              onCancelEdit={handleCancelEdit}
+              onSaveEdit={handleSaveEdit}
+              onEditChange={handleEditChange}
+              isEditing={editingTaskId === task._id}
+              editingTask={editingTask}
+            />
+          ))}
+        </List>
+      </SortableContext>
+    </DndContext>
   );
 };
 
